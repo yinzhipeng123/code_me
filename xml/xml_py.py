@@ -1,18 +1,19 @@
 # -- coding: utf-8 --
 import xml.etree.ElementTree as ET
-import ConfigParser
+import configparser
 import os
 import shutil
+import subprocess
 shutil.rmtree('new')
 os.mkdir("new")
-conf = ConfigParser.ConfigParser()
+conf = configparser.ConfigParser()
 conf.read("which.conf")
 filelist = conf.items("which")
 # filelist存放了哪些文件需要被修改
 # filelist是个集合，需要遍历，i[1]是文件名
 
 for i in filelist:
-    xml_conf = ConfigParser.ConfigParser()
+    xml_conf = configparser.ConfigParser()
 
     xml_conf.read("old/" + i[1] + ".conf")
     xml_conflist = xml_conf.sections()
@@ -36,14 +37,14 @@ for i in filelist:
 
 
         if xml_superposition!="true" and xml_superposition!="false":
-            print"错误！！！！superposition参数只能是true，false"
+            print("错误！！！！superposition参数只能是true，false")
             exit()
 
 
         xml_action = xml_conf.get(a, "action")
         # action的意思是这个章节的值是要添加还是移除
         if xml_action!="add" and xml_action!="remove":
-            print"错误！！！！xml_action参数只能是add，remove"
+            print("错误！！！！xml_action参数只能是add，remove")
             exit()
 
         list = []
@@ -103,7 +104,7 @@ for i in filelist:
 
 
             else:
-                print "删除该节点"
+                print("删除该节点")
                 for property in root.findall('property'):
                     name = property.find('name').text
                     if name == xml_name:
@@ -127,9 +128,14 @@ for i in filelist:
                     final.text = xml_final
                 root.append(property)
             else:
-                print "什么都不做"+xml_name
-    print "-----处理完"+i[1] + ".xml"+"----"
+                print("什么都不做"+xml_name)
+    print("-----处理完"+i[1] + ".xml"+"----")
     tree.write('new/'+i[1] +'.xml',encoding='utf-8',xml_declaration=True)
+
+for i in filelist:
+    print(i)
+
+    subprocess.call('xmllint  --format new/' + i[1] + '.xml > format/' + i[1] + '.xml', shell=True)
 
 
 
