@@ -38,3 +38,9 @@ final = false # 这个property的final值是true还有false，hadoop的配置文
 
 然后执行python3 xml_py.py  
 在format文件夹下就会生成新的修改好的配置了
+
+对了，这个脚本只能在Linux平台下用，需要xmllint命令，主要用这个命令进行美化    
+安装命令如下  
+centos安装 yum install -y libxml2-utils
+
+ubuntu安装 apt-get install libxml2-utils
