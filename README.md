@@ -5,7 +5,7 @@
 <configuration>  
 <property>  
 <name>yinzhipeng</name>  
-<value>zhangli</value> 
+<value>meilidongren</value> 
 <final>false</final>
 </property>  
 </configuration>  
