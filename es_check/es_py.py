@@ -24,8 +24,6 @@ if escron=="yes":
 else:
     date=conf.get("base","date")
     csvtime = mytime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()))
-print date
-print csvtime
 
 es_name=conf.get("base","es_name")
 #获取json的方法
@@ -36,7 +34,6 @@ def jsonPost(eshost,date,es_name,role,hostname):
     res=urllib2.urlopen(req)
     page_json=res.read()
     res.close()
-    print "----------------"
     return page_json
 
 #把hosts文件读取出来
@@ -103,8 +100,6 @@ for a in datas:
     a2[datajishu2][0] = hostname2
     datajishu2=datajishu2+1
 
-
-print a2
 
 
 #添加表头，[主机名，namenode日志条数,datanode日志条数,...]
